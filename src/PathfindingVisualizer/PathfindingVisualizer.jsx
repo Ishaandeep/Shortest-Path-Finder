@@ -70,6 +70,16 @@ const PathfindingVisualizer = () => {
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
   };
 
+  const resetGrid = () => {
+    const newGrid = getInitialGrid();
+    for (let row = 0; row < grid.length; row++) {
+      for (let col = 0; col < grid[0].length; col++) {
+        document.getElementById(`node-${row}-${col}`).className = "node";
+      }
+    }
+    setGrid(newGrid);
+  };
+
   return (
     <>
       <div className="header">
@@ -77,6 +87,7 @@ const PathfindingVisualizer = () => {
         <h1>Pathfinding Visualizer</h1>
       </div>
       <button onClick={visualizeDijkstra}>Find Shortest Path</button>
+      <button onClick={resetGrid}>Reset Grid</button>
       <div className="grid">
         {grid.map((row, rowIdx) => {
           return (
