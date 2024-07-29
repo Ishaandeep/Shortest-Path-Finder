@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from "./path-logo-2.jpg";
+
 import Node from "./Node/Node";
 import { dijkstra, getNodesInShortestPathOrder } from "../algorithm/dijkstra";
 
@@ -121,18 +121,11 @@ const PathfindingVisualizer = () => {
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
   };
 
-  const resetGrid = () => {
-    window.location.reload();
-  };
-
   return (
     <>
-      <div className="header">
-        <img src={logo} alt="logo" className="App-logo" />
-        <h1>Pathfinding Visualizer</h1>
-      </div>
-      <button onClick={visualizeDijkstra}>Find Shortest Path</button>
-      <button onClick={resetGrid}>Reset Grid</button>
+      <button className="button" onClick={visualizeDijkstra}>
+        Find Shortest Path
+      </button>
       <div className="grid">
         {grid.map((row, rowIdx) => {
           return (
