@@ -20,3 +20,39 @@
 .App-link {
   color: #61dafb;
 }
+.button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.button:active {
+  background-color: #004085;
+}
+
+.button:disabled {
+  background-color: #d6d8db;
+  cursor: not-allowed;
+}
+
+.button-reset {
+  background-color: #dc3545;
+}
+
+.button-reset:hover {
+  background-color: #c82333;
+}
+
+.button-reset:active {
+  background-color: #bd2130;
+}
