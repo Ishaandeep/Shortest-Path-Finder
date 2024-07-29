@@ -6,19 +6,70 @@ import { dijkstra, getNodesInShortestPathOrder } from "../algorithm/dijkstra";
 import "./PathfindingVisualizer.css";
 import "../App.css";
 
-const START_NODE_ROW = 10;
-const START_NODE_COL = 15;
-const FINISH_NODE_ROW = 10;
-const FINISH_NODE_COL = 35;
+// const START_NODE_ROW = 10;
+// const START_NODE_COL = 15;
+// const FINISH_NODE_ROW = 10;
+// const FINISH_NODE_COL = 35;
+const START_NODE_ROW_LARGE = 10;
+const START_NODE_COL_LARGE = 15;
+const FINISH_NODE_ROW_LARGE = 10;
+const FINISH_NODE_COL_LARGE = 35;
+
+const START_NODE_ROW_SMALL = 12;
+const START_NODE_COL_SMALL = 1;
+const FINISH_NODE_ROW_SMALL = 12;
+const FINISH_NODE_COL_SMALL = 13;
 
 const PathfindingVisualizer = () => {
   const [grid, setGrid] = useState([]);
   const [mouseIsPressed, setMouseIsPressed] = useState(false);
+  const [rows, setRows] = useState(20); // Default to larger display
+  const [cols, setCols] = useState(50); // Default to larger display
+  const [startNodeRow, setStartNodeRow] = useState(START_NODE_ROW_LARGE);
+  const [startNodeCol, setStartNodeCol] = useState(START_NODE_COL_LARGE);
+  const [finishNodeRow, setFinishNodeRow] = useState(FINISH_NODE_ROW_LARGE);
+  const [finishNodeCol, setFinishNodeCol] = useState(FINISH_NODE_COL_LARGE);
 
   useEffect(() => {
-    const initialGrid = getInitialGrid();
-    setGrid(initialGrid);
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        // Assuming mobile width threshold
+        console.log("small screen");
+        setRows(24);
+        setCols(15);
+        setStartNodeRow(START_NODE_ROW_SMALL);
+        setStartNodeCol(START_NODE_COL_SMALL);
+        setFinishNodeRow(FINISH_NODE_ROW_SMALL);
+        setFinishNodeCol(FINISH_NODE_COL_SMALL);
+      } else {
+        console.log("big screen");
+        setRows(20);
+        setCols(50);
+        setStartNodeRow(START_NODE_ROW_LARGE);
+        setStartNodeCol(START_NODE_COL_LARGE);
+        setFinishNodeRow(FINISH_NODE_ROW_LARGE);
+        setFinishNodeCol(FINISH_NODE_COL_LARGE);
+      }
+    };
+
+    handleResize(); // Set initial values
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    const initialGrid = getInitialGrid(
+      rows,
+      cols,
+      startNodeRow,
+      startNodeCol,
+      finishNodeRow,
+      finishNodeCol
+    );
+    console.log(initialGrid);
+    setGrid(initialGrid);
+  }, [rows, cols, startNodeRow, startNodeCol, finishNodeRow, finishNodeCol]);
 
   const handleMouseDown = (row, col) => {
     const newGrid = getNewGridWithWallToggled(grid, row, col);
@@ -63,21 +114,15 @@ const PathfindingVisualizer = () => {
   };
 
   const visualizeDijkstra = () => {
-    const startNode = grid[START_NODE_ROW][START_NODE_COL];
-    const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    const startNode = grid[startNodeRow][startNodeCol];
+    const finishNode = grid[finishNodeRow][finishNodeCol];
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
   };
 
   const resetGrid = () => {
-    const newGrid = getInitialGrid();
-    for (let row = 0; row < grid.length; row++) {
-      for (let col = 0; col < grid[0].length; col++) {
-        document.getElementById(`node-${row}-${col}`).className = "node";
-      }
-    }
-    setGrid(newGrid);
+    window.location.reload();
   };
 
   return (
@@ -106,7 +151,7 @@ const PathfindingVisualizer = () => {
                     onMouseEnter={(row, col) => handleMouseEnter(row, col)}
                     onMouseUp={handleMouseUp}
                     row={row}
-                  ></Node>
+                  />
                 );
               })}
             </div>
@@ -117,24 +162,47 @@ const PathfindingVisualizer = () => {
   );
 };
 
-const getInitialGrid = () => {
+const getInitialGrid = (
+  rows,
+  cols,
+  startNodeRow,
+  startNodeCol,
+  finishNodeRow,
+  finishNodeCol
+) => {
   const grid = [];
-  for (let row = 0; row < 20; row++) {
+  for (let row = 0; row < rows; row++) {
     const currentRow = [];
-    for (let col = 0; col < 50; col++) {
-      currentRow.push(createNode(col, row));
+    for (let col = 0; col < cols; col++) {
+      currentRow.push(
+        createNode(
+          col,
+          row,
+          startNodeRow,
+          startNodeCol,
+          finishNodeRow,
+          finishNodeCol
+        )
+      );
     }
     grid.push(currentRow);
   }
   return grid;
 };
 
-const createNode = (col, row) => {
+const createNode = (
+  col,
+  row,
+  startNodeRow,
+  startNodeCol,
+  finishNodeRow,
+  finishNodeCol
+) => {
   return {
     col,
     row,
-    isStart: row === START_NODE_ROW && col === START_NODE_COL,
-    isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
+    isStart: row === startNodeRow && col === startNodeCol,
+    isFinish: row === finishNodeRow && col === finishNodeCol,
     distance: Infinity,
     isVisited: false,
     isWall: false,
