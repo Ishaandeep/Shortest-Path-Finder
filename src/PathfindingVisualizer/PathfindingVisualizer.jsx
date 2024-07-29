@@ -6,10 +6,6 @@ import { dijkstra, getNodesInShortestPathOrder } from "../algorithm/dijkstra";
 import "./PathfindingVisualizer.css";
 import "../App.css";
 
-// const START_NODE_ROW = 10;
-// const START_NODE_COL = 15;
-// const FINISH_NODE_ROW = 10;
-// const FINISH_NODE_COL = 35;
 const START_NODE_ROW_LARGE = 10;
 const START_NODE_COL_LARGE = 15;
 const FINISH_NODE_ROW_LARGE = 10;
