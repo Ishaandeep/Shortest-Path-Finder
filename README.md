@@ -7,6 +7,6 @@ This App is made using React.
 
 1. Add wall between the starting node and the destination node
 2. This project will find the shorted path between both
-3. This project Dijkstra's Algorithm
+3. This project uses Dijkstra's Algorithm
 
 [Webpage link](http://Ishaandeep.github.io/shortest-path-finder)
