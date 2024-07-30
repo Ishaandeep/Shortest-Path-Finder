@@ -14,7 +14,7 @@ const FINISH_NODE_COL_LARGE = 35;
 const START_NODE_ROW_SMALL = 12;
 const START_NODE_COL_SMALL = 1;
 const FINISH_NODE_ROW_SMALL = 12;
-const FINISH_NODE_COL_SMALL = 13;
+const FINISH_NODE_COL_SMALL = 12;
 
 const PathfindingVisualizer = () => {
   const [grid, setGrid] = useState([]);
@@ -32,7 +32,7 @@ const PathfindingVisualizer = () => {
         // Assuming mobile width threshold
         console.log("small screen");
         setRows(24);
-        setCols(15);
+        setCols(14);
         setStartNodeRow(START_NODE_ROW_SMALL);
         setStartNodeCol(START_NODE_COL_SMALL);
         setFinishNodeRow(FINISH_NODE_ROW_SMALL);
