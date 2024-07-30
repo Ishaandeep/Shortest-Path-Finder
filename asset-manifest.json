@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/shortest-path-finder/static/css/main.46e3ac57.css",
-    "main.js": "/shortest-path-finder/static/js/main.25c93519.js",
+    "main.js": "/shortest-path-finder/static/js/main.1f6e443a.js",
     "static/js/453.2ca31902.chunk.js": "/shortest-path-finder/static/js/453.2ca31902.chunk.js",
     "static/media/path-logo-2.jpg": "/shortest-path-finder/static/media/path-logo-2.5d6e3a8e17f9abca6fdf.jpg",
     "index.html": "/shortest-path-finder/index.html",
     "main.46e3ac57.css.map": "/shortest-path-finder/static/css/main.46e3ac57.css.map",
-    "main.25c93519.js.map": "/shortest-path-finder/static/js/main.25c93519.js.map",
+    "main.1f6e443a.js.map": "/shortest-path-finder/static/js/main.1f6e443a.js.map",
     "453.2ca31902.chunk.js.map": "/shortest-path-finder/static/js/453.2ca31902.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.46e3ac57.css",
-    "static/js/main.25c93519.js"
+    "static/js/main.1f6e443a.js"
   ]
 }
